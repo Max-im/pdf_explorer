@@ -1,8 +1,10 @@
 import { Router } from 'express';
-import { getSlidesDataByLang } from '../controllers/slides';
+import isLoggedIn from '../verify/isLoggedIn';
+import { getSlidesDataByLang, createPDF } from '../controllers/slides';
 
 const router = Router();
 
-router.get('/:langId', getSlidesDataByLang);
+router.get('/:langId', isLoggedIn, getSlidesDataByLang);
+router.post('/create-pdf', isLoggedIn, createPDF);
 
 module.exports = router;
